@@ -92,8 +92,9 @@ textarea {
   font-family: "Courier New", monospace;
   line-height: 24px;
   font-size: inherit;
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 620px;
+  padding: 20px;
+  margin: 20px auto;
 }
 
 #initial-chat > p {
@@ -106,13 +107,17 @@ textarea {
 #initial-chat > p:last-child::after {
   content: "";
   position: absolute;
-  top: 0;
+  bottom: 0;
   display: inline-block;
   background-color: #606060;
   vertical-align: top;
   width: 10px;
   height: 24px;
   animation: blink 1s step-end infinite;  
+}
+#initial-chat > p:last-child:empty::after {
+  top: 0;
+  bottom: auto;
 }
 
 @keyframes blink {
@@ -174,7 +179,13 @@ h1, h2, h3 {
 
 h2 {
   margin-top: 0;
-  font-size: 36px;
+  font-size: 24px;
+}
+
+@media screen and (min-width: 620px) {
+  h2 {
+    font-size: 36px;
+  }
 }
 
 #buttons {
