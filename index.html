@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>LetsFlow &mdash; Workflow engine</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body class="initial">
+  <div id="initial-chat">
+    <p>Hi there,</p>
+    <p>I see you're already here.</p>
+    <p>We're working hard, but we're not quite ready yet.</p>
+    <p>Can you come back later?</p>
+    <p></p>
+    <p></p>
+    <p>Ow, you're still here?</p>
+    <p>Okay, give me a few seconds. I'll show what we're working on.</p>
+  </div>
+  <div id="site">
+    <section id="hero">
+      <img src="letsflow-logo.svg" class="logo">
+      <h2>The workflow engine that developers love</h2>
+    </section>
+
+    <section id="whatis">
+      <div class="text">
+        <p>LetsFlow allows developers to automate processes using the tools we know and low.</p>
+        <p>The focus is on integrations for both third party services and your own propriaty applications. This makes it the ideal solution for automating business processes, building conceirge MVPs, and creating blockchain oracles.</p>
+        <p>Workflows can run either centralized or decentralized across organizations for optimal collaboration. Decentralized workflows are powered by the blockchain of <a href="https://ltonetwork.com">LTO Network</a>.</p>
+        <h4>Scheduled to be released in April 2020</h4>
+      </div>
+    </section>
+
+    <section id="buttons">
+      <a class="button" href="https://docs.letsflow.io">Read the documentation</a>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const container = document.getElementById('initial-chat');
+      const paragraphs = document.querySelectorAll('#initial-chat > p');
+      const speed = {
+        type: 30,
+        line: 1000,
+        next: 800,
+        initial: 2000,
+        page: 3000
+      };
+
+      function chat(index) {
+        type(container.lastChild, paragraphs[index].innerText, function () {
+          container.appendChild(document.createElement("p"));
+
+          if (index + 1 < paragraphs.length) {
+            setTimeout(function () {
+              chat(index + 1);
+            }, speed.next);
+          } else {
+            setTimeout(function () {
+              document.body.classList.remove('initial');
+              document.getElementById('site').classList.add('buildup');
+            }, speed.page);
+          }
+        });
+      }
+
+      function type(element, text, next) {
+        element.innerHTML += text.charAt(0);
+
+        if (text !== '') {
+          setTimeout(function () {
+            type(element, text.substring(1), next);
+          }, speed.type);
+        } else {
+          setTimeout(function () {
+            next();
+          }, speed.line);
+        }
+      }
+
+      container.innerHTML = '<p></p>';
+
+      setTimeout(function () {
+        chat(0);
+      }, speed.initial);
+    })();
+  </script>
+</body>
+</html>
+
